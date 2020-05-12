@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Posts</string>
+
+    <!-- Common -->
+    <string name="unexpectedError">Something went wrong</string>
+
+    <!-- Comments -->
+    <string name="comments_empty">No comments</string>
+    <string name="comments_error">Unable to load comments. Please try again.</string>
+</resources>
