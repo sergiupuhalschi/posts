@@ -23,5 +23,17 @@
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/post_item" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/large_margin"
+            android:layout_marginEnd="@dimen/large_margin"
+            android:text="@{viewModel.info}"
+            android:textColor="@color/subtitle"
+            android:textSize="@dimen/text_size_subtitle"
+            app:visible="@{!viewModel.isLoading()}"
+            tools:text="Error" />
     </FrameLayout>
 </layout>

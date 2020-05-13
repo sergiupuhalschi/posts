@@ -4,6 +4,9 @@
     <!-- Common -->
     <string name="unexpectedError">Something went wrong</string>
 
+    <!-- Posts -->
+    <string name="posts_empty">No posts</string>
+
     <!-- Comments -->
     <string name="comments_empty">No comments</string>
     <string name="comments_error">Unable to load comments. Please try again.</string>

@@ -22,7 +22,7 @@ class PostDetailsActivity : ViewModelActivity() {
     private val viewModel: PostDetailsViewModel by viewModels { viewModelFactory }
 
     private lateinit var binding: PostDetailsActivityBinding
-    private val commentsAdapter by lazy { CommentsAdapter() }
+    private val adapter by lazy { PostDetailsItemsAdapter() }
 
     companion object {
 
@@ -61,13 +61,12 @@ class PostDetailsActivity : ViewModelActivity() {
             setDisplayHomeAsUpEnabled(true)
             setHomeAsUpIndicator(R.drawable.ic_arrow_back)
         }
-        binding.commentsRV.adapter = commentsAdapter
+        binding.commentsRV.adapter = adapter
         binding.commentsSRL.setOnRefreshListener { viewModel.loadComments() }
     }
 
     private fun observeData() {
-        viewModel.title.observeNonNull(this, { supportActionBar?.title = it })
-        viewModel.comments.observeNonNull(this, { commentsAdapter.setComments(it) })
+        viewModel.items.observeNonNull(this, { adapter.setItems(it) })
         viewModel.isLoading.observeNonNull(this, { binding.commentsSRL.isRefreshing = it })
     }
 }

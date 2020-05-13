@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="post"
+            type="com.sergiupuhalschi.posts.domain.models.PostDto" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/lightBackground"
+            app:layout_constraintBottom_toBottomOf="@+id/bodyTV"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/titleTV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/large_margin"
+            android:layout_marginTop="@dimen/large_margin"
+            android:layout_marginEnd="@dimen/large_margin"
+            android:fontFamily="sans-serif-black"
+            android:text="@{post.title}"
+            android:textColor="@color/title"
+            android:textSize="@dimen/text_size_header"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="ea molestias quasi exercitationem repellat qui ipsa sit aut" />
+
+        <TextView
+            android:id="@+id/bodyTV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_margin"
+            android:fontFamily="sans-serif-black"
+            android:paddingBottom="@dimen/default_margin"
+            android:text="@{post.body}"
+            android:textColor="@color/subtitle"
+            android:textSize="@dimen/text_size_title"
+            app:layout_constraintEnd_toEndOf="@+id/titleTV"
+            app:layout_constraintStart_toStartOf="@+id/titleTV"
+            app:layout_constraintTop_toBottomOf="@+id/titleTV"
+            tools:text="et iusto sed quo iure\nvoluptatem occaecati omnis eligendi aut ad\nvoluptatem doloribus vel accusantium quis pariatur\nmolestiae porro eius odio et labore et velit aut" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

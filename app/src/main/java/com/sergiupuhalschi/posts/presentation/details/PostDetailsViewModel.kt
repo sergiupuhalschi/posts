@@ -16,9 +16,7 @@ class PostDetailsViewModel @Inject constructor(
     private val stringProvider: StringProvider
 ) : BaseViewModel() {
 
-    val title = MutableLiveData<String>()
-    val body = MutableLiveData<String>()
-    val comments = MutableLiveData<List<CommentDto>>()
+    val items = MutableLiveData<List<PostDetailsItem<*>>>()
     val isLoading = MutableLiveData<Boolean>()
     val loadingInfo = SingleLiveEvent<String>()
 
@@ -29,7 +27,7 @@ class PostDetailsViewModel @Inject constructor(
             return
         }
         this.post = post
-        initData()
+        loadComments()
     }
 
     fun loadComments() {
@@ -37,20 +35,25 @@ class PostDetailsViewModel @Inject constructor(
         getCommentsUseCase.perform(post.id)
             .doAfterTerminate { isLoading.value = false }
             .safeSubscribe({
-                if (it.isEmpty()) {
-                    loadingInfo.value = stringProvider.getString(R.string.comments_empty)
-                } else {
-                    comments.value = it
-                }
+                items.value = toItems(post, it)
             }, {
                 Timber.e(it)
                 loadingInfo.value = stringProvider.getString(R.string.comments_error)
             })
     }
 
-    private fun initData() {
-        title.value = post.title
-        body.value = post.body
-        loadComments()
-    }
+    private fun toItems(post: PostDto, comments: List<CommentDto>) =
+        ArrayList<PostDetailsItem<*>>().apply {
+            add(PostDetailsItem(PostDetailsItemType.HEADER, post))
+            if (isEmpty()) {
+                add(
+                    PostDetailsItem(
+                        PostDetailsItemType.INFO,
+                        stringProvider.getString(R.string.comments_empty)
+                    )
+                )
+            } else {
+                addAll(comments.map { PostDetailsItem(PostDetailsItemType.COMMENT, it) })
+            }
+        }
 }
